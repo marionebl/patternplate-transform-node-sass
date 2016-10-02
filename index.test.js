@@ -1,7 +1,7 @@
 const test = require('ava');
 const expect = require('unexpected');
 const mocks = require('./mocks');
-const factory = require('./');
+const factory = require('./source');
 
 test('it should export a function as default', t => {
 	const actual = typeof factory;
@@ -57,7 +57,7 @@ test('transforming a sass file with dependencies', async () => {
 	const transform = factory();
 	const resultFile = await transform(file, null, {});
 	const expected = '.dependency{color:red;}.dependent{color:green;}';
-	const actual = resultFile.buffer.toString().replace(/\n/g, '').replace(/w/, '');
+	const actual = resultFile.buffer.toString().replace(/\n/g, '').replace(/\t/g, '').replace(/ /g, '');
 	expect(actual, 'to be', expected);
 });
 
@@ -65,8 +65,9 @@ test('transforming a scss file with npm dependencies', async () => {
 	const file = await mocks.get('npm-dependent.scss');
 	const transform = factory();
 	const resultFile = await transform(file, null, {});
-	const actual = resultFile.buffer.toString().replace(/\n/g, '').replace(/w/, '');
-	expect(actual, 'to contain', '/*!normalize-scss|MIT/GPLv2 License|bit.ly/normalize-scss*/');
+	const lines = resultFile.buffer.toString().split('\n');
+	const actual = resultFile.buffer.toString().replace(/\n/g, '').replace(/\t/g, '').replace(/ /g, '');
+	expect(lines[0], 'to contain', '/*! normalize-scss | MIT/GPLv2 License | bit.ly/normalize-scss */');
 	expect(actual, 'to contain', '.dependent{color:green;}');
 });
 

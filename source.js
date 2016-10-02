@@ -34,24 +34,28 @@ async function sassTansform(file: File, _, config: Config) : Promise<File> {
 /** Create a cutom async importer function applicable to node-sass*/
 function importer(opts: {[key: string]: any}, deps: Dependencies, cache: Cache): Function {
 	/** Custom async importer resolving files from /patterns and node_modules*/
-	return async (url: string, prev: string, cb: Function) : any => {
-		const context = deps.find(dep => dep.path === prev) || {dependencies: {}, path: ''};
-		const match = context ? (context.dependencies || {})[url] : null;
+	return (url: string, prev: string, cb: Function) : any => {
+		// IMPORTANT: do not use an async function here – node-sass assumes
+		// synchronous operation if this returns **anything**
+		new Promise(() => { // eslint-disable-line no-new
+			const context = deps.find(dep => dep.path === prev) || {dependencies: {}, path: ''};
+			const match = context ? (context.dependencies || {})[url] : null;
+			const base = context.path ? process.cwd() : path.dirname(prev);
+			const options = {base, resolveKey: 'style', npm: Boolean(context.path)};
 
-		if (match) {
-			const options = merge({}, opts);
-			const source = match.buffer.toString('utf-8');
-			const result = await render(source, options);
-			const contents = result.css.toString();
-			return cb({contents});
-		}
+			if (match) {
+				const options = merge({}, opts);
+				const source = match.buffer.toString('utf-8');
+				render(source, options)
+					.then(({css}) => ({contents: css.toString()}))
+					.then(cb)
+					.catch(cb);
+			}
 
-		const base = context.path ? process.cwd() : path.dirname(prev);
-		const options = {base, resolveKey: 'style', npm: Boolean(context.path)};
-
-		const result = await sassLoad(url, prev, options, cache);
-		// console.log(result);
-		return cb(result);
+			sassLoad(url, prev, options, cache)
+				.then(cb)
+				.catch(cb);
+		});
 	};
 }
 
@@ -72,20 +76,16 @@ function render(data: string, options:SassOptions): Promise<SassResult> {
 /** Load sass files outside the pattern tree */
 async function sassLoad(url: string, prev: string, options, cache): Promise<ImportResult> {
 	const file = await sassResolve(url, prev, options);
-	cache[file] = cache[file] || await fs.readFile(file, 'utf-8');
-	return {contents: cache[file], file};
+	const contents = await readFile(file, cache);
+	return {contents, file};
 }
 
 /** Resolve sass files outside the pattern tree */
 async function sassResolve(url: string, prev: string, options): Promise<string> {
-	const urls = options.npm ? [url] : [normalizeSassUrl(url, prev, true), normalizeSassUrl(url, prev)];
-	const jobs = urls.map(async u => {
-		try {
-			return await nResolve(u, options);
-		} catch (err) {
-			return null;
-		}
-	});
+	const urls = options.npm ?
+		[url] : [normalizeSassUrl(url, prev, true), normalizeSassUrl(url, prev)];
+
+	const jobs = urls.map(u => tryResolve(u, options));
 
 	const results = await Promise.all(jobs);
 	const result = results.find(r => typeof r === 'string');
@@ -95,6 +95,11 @@ async function sassResolve(url: string, prev: string, options): Promise<string> 
 	}
 
 	return result;
+}
+
+function tryResolve(url, options) {
+	return Promise.resolve(nResolve(url, options))
+		.catch(() => null);
 }
 
 /** Normalize a SASS import url to match relative resolve paths*/
@@ -108,6 +113,15 @@ function normalizeSassUrl(url: string, prev: string, importable: bool = false): 
 		path.dirname(url),
 		`${prefix}${path.basename(url)}${ext}`
 	].filter(Boolean).join('/');
+}
+
+/** Read file from path or cache, if available */
+async function readFile(filePath: string, cache: Cache = {}) : Promise<string> {
+	if (cache[filePath]) {
+		return cache[filePath];
+	}
+	cache[filePath] = await fs.readFile(filePath, 'utf-8');
+	return cache[filePath];
 }
 
 /** Decide if indented syntax to use based on <filePath> */
@@ -150,7 +164,7 @@ type FileDependencies = {
 
 /** Result object expected by sass.importer callback */
 type ImportResult = {
-	contents: Buffer & string;
+	contents: string;
 	file: string;
 };
 

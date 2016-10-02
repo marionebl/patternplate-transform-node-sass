@@ -20,6 +20,9 @@
     "files": [
       "index.test.js"
     ],
+    "require": [
+      "babel-register"
+    ],
     "source": [
       "source.js",
       "mocks/**/*"
@@ -27,9 +30,11 @@
   },
   "babel": {
     "plugins": [
-      "async-to-promises",
       "transform-es2015-parameters",
       "transform-flow-comments"
+    ],
+    "presets": [
+      "stage-2"
     ]
   },
   "tags": [
@@ -50,9 +55,10 @@
   "devDependencies": {
     "ava": "0.16.0",
     "babel-cli": "6.16.0",
-    "babel-plugin-async-to-promises": "1.0.5",
     "babel-plugin-transform-es2015-parameters": "6.17.0",
     "babel-plugin-transform-flow-comments": "6.17.0",
+    "babel-preset-stage-2": "6.17.0",
+    "babel-register": "6.16.3",
     "dependency-check": "2.6.0",
     "documentation": "4.0.0-beta10",
     "flow-bin": "0.33.0",
