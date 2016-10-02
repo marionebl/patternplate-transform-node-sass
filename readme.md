@@ -1,6 +1,6 @@
 # patternplate-transform-node-sass [![stability][0]][1]
 
-[![npm version][2]][3] [![Travis branch][4]][5]
+[![npm version][2]][3] [![Travis branch][4]][5] [![Appveyor branch][6]][7]
 
 
 Process SASS and SCSS to CSS with patternplate.
@@ -97,3 +97,5 @@ Copyright by Mario Nebl. Released under the MIT license.
 [3]: https://npmjs.org/package/patternplate-transform-node-sass
 [4]: https://img.shields.io/travis/marionebl/patternplate-transform-node-sass/master.svg?style=flat-square
 [5]: https://travis-ci.org/marionebl/patternplate-transform-node-sass
+[6]: https://img.shields.io/appveyor/ci/marionebl/patternplate-transform-node-sass/master.svg?style=flat-square
+[7]: https://ci.appveyor.com/project/marionebl/patternplate-transform-node-sass
