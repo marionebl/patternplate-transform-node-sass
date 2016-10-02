@@ -49,6 +49,7 @@
   "author": "Jimdo GmbH",
   "devDependencies": {
     "ava": "0.16.0",
+    "babel-cli": "6.16.0",
     "babel-plugin-async-to-promises": "1.0.5",
     "babel-plugin-transform-es2015-parameters": "6.17.0",
     "babel-plugin-transform-flow-comments": "6.17.0",
