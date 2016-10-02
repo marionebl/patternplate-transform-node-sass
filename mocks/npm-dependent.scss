@@ -1,0 +1,7 @@
+@import "normalize-scss";
+
+@include normalize();
+
+.dependent {
+  color: green
+}

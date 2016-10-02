@@ -1,0 +1,9 @@
+[ignore]
+.*/node-resolve/test/.*
+
+[include]
+index.js
+
+[libs]
+
+[options]

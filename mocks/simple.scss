@@ -1,0 +1,8 @@
+body {
+  color: red;
+  background: green;
+  &.special {
+    color: green;
+    background: red;
+  }
+}
