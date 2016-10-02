@@ -2,11 +2,11 @@
 
 > Be nice. Period.
 
-* flow types
-* xo code style
-* no eslint-disable
-* ava module tests
-* conventional commits
+-   flow types
+-   xo code style
+-   no eslint-disable
+-   ava module tests
+-   conventional commits
 
 ## Internal API
 
@@ -14,123 +14,204 @@
 
 ### createTransform
 
-[source.js:54-56](https://github.com/marionebl/patternplate-transform-node-sass/blob/2002049dfaa3b7805787b7f7ba58dc2b0ffae9c2/source.js#L54-L56 "Source code on GitHub")
+[source.js:15-17](https://github.com/marionebl/patternplate-transform-node-sass/blob/e2f6a06140fd9d5851dc1d33adf3620ec0136ce7/source.js#L15-L17 "Source code on GitHub")
 
 Entry point for patternplate
 
-Returns **[Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)**
+Returns **[Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)** 
 
 ### sassTansform
 
-[source.js:59-71](https://github.com/marionebl/patternplate-transform-node-sass/blob/2002049dfaa3b7805787b7f7ba58dc2b0ffae9c2/source.js#L59-L71 "Source code on GitHub")
+[source.js:20-32](https://github.com/marionebl/patternplate-transform-node-sass/blob/e2f6a06140fd9d5851dc1d33adf3620ec0136ce7/source.js#L20-L32 "Source code on GitHub")
 
 Consume a patternplate file object and transform its buffer from scss to css
 
 **Parameters**
 
--   `file` **File**
+-   `file` **[File](#file)** 
 -   `_`  
--   `config` **Config**
+-   `config` **[Config](#config)** 
 
-Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;File>**
+Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[File](#file)>** 
 
 ### importer
 
-[source.js:74-95](https://github.com/marionebl/patternplate-transform-node-sass/blob/2002049dfaa3b7805787b7f7ba58dc2b0ffae9c2/source.js#L74-L95 "Source code on GitHub")
+[source.js:35-56](https://github.com/marionebl/patternplate-transform-node-sass/blob/e2f6a06140fd9d5851dc1d33adf3620ec0136ce7/source.js#L35-L56 "Source code on GitHub")
 
 Create a cutom async importer function applicable to node-sass
 
 **Parameters**
 
--   `opts` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)**
--   `deps` **Dependencies**
--   `cache` **Cache**
+-   `opts` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+-   `deps` **[Dependencies](#dependencies)** 
+-   `cache` **[Cache](#cache)** 
 
-Returns **[Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)**
+Returns **[Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)** 
 
 ### url
 
-[source.js:76-94](https://github.com/marionebl/patternplate-transform-node-sass/blob/2002049dfaa3b7805787b7f7ba58dc2b0ffae9c2/source.js#L76-L94 "Source code on GitHub")
+[source.js:37-55](https://github.com/marionebl/patternplate-transform-node-sass/blob/e2f6a06140fd9d5851dc1d33adf3620ec0136ce7/source.js#L37-L55 "Source code on GitHub")
 
 Custom async importer resolving files from /patterns and node_modules
 
 ### render
 
-[source.js:98-109](https://github.com/marionebl/patternplate-transform-node-sass/blob/2002049dfaa3b7805787b7f7ba58dc2b0ffae9c2/source.js#L98-L109 "Source code on GitHub")
+[source.js:59-70](https://github.com/marionebl/patternplate-transform-node-sass/blob/e2f6a06140fd9d5851dc1d33adf3620ec0136ce7/source.js#L59-L70 "Source code on GitHub")
 
 Render sass source <data> according to <options>
 
 **Parameters**
 
--   `data` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)**
--   `options` **SassOptions**
+-   `data` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+-   `options` **[SassOptions](#sassoptions)** 
 
-Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;SassResult>**
+Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[SassResult](#sassresult)>** 
 
 ### sassLoad
 
-[source.js:112-116](https://github.com/marionebl/patternplate-transform-node-sass/blob/2002049dfaa3b7805787b7f7ba58dc2b0ffae9c2/source.js#L112-L116 "Source code on GitHub")
+[source.js:73-77](https://github.com/marionebl/patternplate-transform-node-sass/blob/e2f6a06140fd9d5851dc1d33adf3620ec0136ce7/source.js#L73-L77 "Source code on GitHub")
 
 Load sass files outside the pattern tree
 
 **Parameters**
 
--   `url` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)**
--   `prev` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)**
+-   `url` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+-   `prev` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 -   `options`  
 -   `cache`  
 
-Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;ImportResult>**
+Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[ImportResult](#importresult)>** 
 
 ### sassResolve
 
-[source.js:119-137](https://github.com/marionebl/patternplate-transform-node-sass/blob/2002049dfaa3b7805787b7f7ba58dc2b0ffae9c2/source.js#L119-L137 "Source code on GitHub")
+[source.js:80-98](https://github.com/marionebl/patternplate-transform-node-sass/blob/e2f6a06140fd9d5851dc1d33adf3620ec0136ce7/source.js#L80-L98 "Source code on GitHub")
 
 Resolve sass files outside the pattern tree
 
 **Parameters**
 
--   `url` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)**
--   `prev` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)**
+-   `url` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+-   `prev` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 -   `options`  
 
-Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)>**
+Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)>** 
 
 ### normalizeSassUrl
 
-[source.js:140-150](https://github.com/marionebl/patternplate-transform-node-sass/blob/2002049dfaa3b7805787b7f7ba58dc2b0ffae9c2/source.js#L140-L150 "Source code on GitHub")
+[source.js:101-111](https://github.com/marionebl/patternplate-transform-node-sass/blob/e2f6a06140fd9d5851dc1d33adf3620ec0136ce7/source.js#L101-L111 "Source code on GitHub")
 
 Normalize a SASS import url to match relative resolve paths
 
 **Parameters**
 
--   `url` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)**
--   `prev` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)**
+-   `url` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+-   `prev` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 -   `importable` **\[[boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean)]**  (optional, default `false`)
 
-Returns **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)**
+Returns **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 
 ### checkIfIsIndentedSyntax
 
-[source.js:153-156](https://github.com/marionebl/patternplate-transform-node-sass/blob/2002049dfaa3b7805787b7f7ba58dc2b0ffae9c2/source.js#L153-L156 "Source code on GitHub")
+[source.js:114-117](https://github.com/marionebl/patternplate-transform-node-sass/blob/e2f6a06140fd9d5851dc1d33adf3620ec0136ce7/source.js#L114-L117 "Source code on GitHub")
 
 Decide if indented syntax to use based on <filePath>
 
 **Parameters**
 
--   `filePath` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)**
+-   `filePath` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 
-Returns **[boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean)**
+Returns **[boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** 
 
 ### flatten
 
-[source.js:159-166](https://github.com/marionebl/patternplate-transform-node-sass/blob/2002049dfaa3b7805787b7f7ba58dc2b0ffae9c2/source.js#L159-L166 "Source code on GitHub")
+[source.js:120-127](https://github.com/marionebl/patternplate-transform-node-sass/blob/e2f6a06140fd9d5851dc1d33adf3620ec0136ce7/source.js#L120-L127 "Source code on GitHub")
 
 Flatten a .dependency tree to a simple array \*
 
 **Parameters**
 
--   `dependencyTree` **FileDependencies**
+-   `dependencyTree` **[FileDependencies](#filedependencies)** 
 -   `vault`   (optional, default `[]`)
 
-Returns **any**
+Returns **any** 
+
+### Cache
+
+[source.js:132-132](https://github.com/marionebl/patternplate-transform-node-sass/blob/e2f6a06140fd9d5851dc1d33adf3620ec0136ce7/source.js#L132-L132 "Source code on GitHub")
+
+Flow types
+
+### Config
+
+[source.js:135-137](https://github.com/marionebl/patternplate-transform-node-sass/blob/e2f6a06140fd9d5851dc1d33adf3620ec0136ce7/source.js#L135-L137 "Source code on GitHub")
+
+patternplate-transform-node-sass configuration
+
+**Properties**
+
+-   `opts` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+
+### File
+
+[source.js:140-144](https://github.com/marionebl/patternplate-transform-node-sass/blob/e2f6a06140fd9d5851dc1d33adf3620ec0136ce7/source.js#L140-L144 "Source code on GitHub")
+
+A patternplate file object with attached meta data
+
+**Properties**
+
+-   `buffer` **[Buffer](https://nodejs.org/api/buffer.html)** 
+-   `dependencies` **[FileDependencies](#filedependencies)** 
+-   `path` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+
+### FileDependencies
+
+[source.js:147-149](https://github.com/marionebl/patternplate-transform-node-sass/blob/e2f6a06140fd9d5851dc1d33adf3620ec0136ce7/source.js#L147-L149 "Source code on GitHub")
+
+Map of dependencies available to a fiel
+
+### ImportResult
+
+[source.js:152-155](https://github.com/marionebl/patternplate-transform-node-sass/blob/e2f6a06140fd9d5851dc1d33adf3620ec0136ce7/source.js#L152-L155 "Source code on GitHub")
+
+Result object expected by sass.importer callback
+
+**Properties**
+
+-   `contents` **any** 
+-   `file` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+
+### Dependencies
+
+[source.js:158-158](https://github.com/marionebl/patternplate-transform-node-sass/blob/e2f6a06140fd9d5851dc1d33adf3620ec0136ce7/source.js#L158-L158 "Source code on GitHub")
+
+Array of file dependencies
+
+### SassFunctions
+
+[source.js:161-163](https://github.com/marionebl/patternplate-transform-node-sass/blob/e2f6a06140fd9d5851dc1d33adf3620ec0136ce7/source.js#L161-L163 "Source code on GitHub")
+
+Map of custom sass function
+
+### SassOptions
+
+[source.js:166-171](https://github.com/marionebl/patternplate-transform-node-sass/blob/e2f6a06140fd9d5851dc1d33adf3620ec0136ce7/source.js#L166-L171 "Source code on GitHub")
+
+Options supported by sass.render
+
+**Properties**
+
+-   `file` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+-   `data` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+-   `functions` **[SassFunctions](#sassfunctions)** 
+-   `importer` **[Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)** 
+
+### SassResult
+
+[source.js:174-177](https://github.com/marionebl/patternplate-transform-node-sass/blob/e2f6a06140fd9d5851dc1d33adf3620ec0136ce7/source.js#L174-L177 "Source code on GitHub")
+
+File object returned by SASS
+
+**Properties**
+
+-   `css` **[Buffer](https://nodejs.org/api/buffer.html)** 
+-   `map` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** 

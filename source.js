@@ -11,45 +11,6 @@ const _ = require('lodash');
 
 module.exports = createTransform;
 
-type Cache = {[key: string]: any};
-
-type Config = {
-	opts: {[key: string]: any};
-};
-
-type File = {
-	buffer: Buffer;
-	dependencies: FileDependencies;
-	path: string;
-};
-
-type FileDependencies = {
-	[path: string]: File;
-};
-
-type ImportResult = {
-	contents: Buffer & string;
-	file: string;
-};
-
-type Dependencies = File[];
-
-type SassFunctions = {
-	[name: string]: Function
-};
-
-type SassOptions = {
-	file?: string;
-	data?: string;
-	functions?: SassFunctions;
-	importer?: Function;
-};
-
-type SassResult = {
-	css: Buffer;
-	map: string;
-};
-
 /** Entry point for patternplate */
 function createTransform() : Function {
 	return sassTansform;
@@ -164,3 +125,53 @@ function flatten(dependencyTree: FileDependencies, vault: File[] = []): File[] {
 			return list;
 		}, vault);
 }
+
+/**
+ * Flow types
+ */
+type Cache = {[key: string]: any};
+
+/** patternplate-transform-node-sass configuration*/
+type Config = {
+	opts?: {[key: string]: any};
+};
+
+/** A patternplate file object with attached meta data */
+type File = {
+	buffer: Buffer;
+	dependencies: FileDependencies;
+	path: string;
+};
+
+/** Map of dependencies available to a fiel */
+type FileDependencies = {
+	[localName: string]: File;
+};
+
+/** Result object expected by sass.importer callback */
+type ImportResult = {
+	contents: Buffer & string;
+	file: string;
+};
+
+/** Array of file dependencies */
+type Dependencies = File[];
+
+/** Map of custom sass function */
+type SassFunctions = {
+	[name: string]: Function
+};
+
+/** Options supported by sass.render */
+type SassOptions = {
+	file?: string;
+	data?: string;
+	functions?: SassFunctions;
+	importer?: Function;
+};
+
+/** File object returned by SASS */
+type SassResult = {
+	css: Buffer;
+	map: string;
+};

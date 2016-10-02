@@ -7,14 +7,14 @@
     "index.js"
   ],
   "scripts": {
-    "start": "npm run test -- --watch",
+    "start": "flow > /dev/null & npm run test -- --watch",
     "build": "babel source.js -o index.js",
     "docs": "documentation readme \"source.js\" --readme-file=contributing.md --github --section=\"Internal API\"",
     "deps": "dependency-check . && dependency-check . --extra --no-dev",
     "lint": "xo source.js",
-    "pretest": "npm run build && npm run deps && npm run lint",
+    "pretest": "npm run build && npm run deps && npm run lint && npm run types",
     "test": "ava",
-    "types": "flow check"
+    "types": "flow"
   },
   "ava": {
     "files": [

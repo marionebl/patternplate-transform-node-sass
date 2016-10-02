@@ -1,8 +1,9 @@
 [ignore]
 .*/node-resolve/test/.*
+<PROJECT_ROOT>/index.js
 
 [include]
-index.js
+source.js
 
 [libs]
 
