@@ -3,11 +3,16 @@
   "version": "2.0.0",
   "description": "Process SASS and SCSS to CSS with patternplate",
   "license": "MIT",
+  "files": [
+    "index.js"
+  ],
   "scripts": {
     "start": "npm run test -- --watch",
+    "build": "babel source.js -o index.js",
+    "docs": "documentation readme \"source.js\" --readme-file=contributing.md --github --section=\"Internal API\"",
     "deps": "dependency-check . && dependency-check . --extra --no-dev",
-    "lint": "xo *.js",
-    "pretest": "npm run deps && npm run lint",
+    "lint": "xo source.js",
+    "pretest": "npm run build && npm run deps && npm run lint",
     "test": "ava",
     "types": "flow check"
   },
@@ -16,12 +21,16 @@
       "index.test.js"
     ],
     "source": [
-      "index.js",
+      "source.js",
       "mocks/**/*"
     ]
   },
-  "xo": {
-    "space": true
+  "babel": {
+    "plugins": [
+      "async-to-promises",
+      "transform-es2015-parameters",
+      "transform-flow-comments"
+    ]
   },
   "tags": [
     "patternplate",
@@ -40,9 +49,12 @@
   "author": "Jimdo GmbH",
   "devDependencies": {
     "ava": "0.16.0",
+    "babel-plugin-async-to-promises": "1.0.5",
+    "babel-plugin-transform-es2015-parameters": "6.17.0",
+    "babel-plugin-transform-flow-comments": "6.17.0",
     "dependency-check": "2.6.0",
+    "documentation": "4.0.0-beta10",
     "flow-bin": "0.33.0",
-    "mz": "2.4.0",
     "node-sass": "3.10.0",
     "normalize-scss": "5.0.3",
     "unexpected": "10.18.1",
@@ -54,7 +66,6 @@
   "dependencies": {
     "lodash": "4.16.2",
     "mz": "2.4.0",
-    "n-resolve": "1.0.0",
-    "node-sass": "3.10.0"
+    "n-resolve": "1.0.0"
   }
 }

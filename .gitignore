@@ -1,3 +1,4 @@
 node_modules
+index.js
 npm-*.log
 .DS_Store
