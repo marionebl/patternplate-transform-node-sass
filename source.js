@@ -31,9 +31,9 @@ async function sassTansform(file: File, _, config: Config) : Promise<File> {
 	return file;
 }
 
-/** Create a cutom async importer function applicable to node-sass*/
+/** Create a cutom async importer function applicable to node-sass */
 function importer(opts: {[key: string]: any}, deps: Dependencies, cache: Cache): Function {
-	/** Custom async importer resolving files from /patterns and node_modules*/
+	/** Custom async importer resolving files from /patterns and node_modules */
 	return (url: string, prev: string, cb: Function) : any => {
 		// IMPORTANT: do not use an async function here – node-sass assumes
 		// synchronous operation if this returns **anything**
@@ -102,7 +102,7 @@ function tryResolve(url, options) {
 		.catch(() => null);
 }
 
-/** Normalize a SASS import url to match relative resolve paths*/
+/** Normalize a SASS import url to match relative resolve paths */
 function normalizeSassUrl(url: string, prev: string, importable: bool = false): string {
 	const prefix = importable ? '_' : '';
 	const ext = path.extname(url) || path.extname(prev);
@@ -130,7 +130,7 @@ function checkIfIsIndentedSyntax(filePath: string): boolean {
 	return extension === '.sass';
 }
 
-/** Flatten a .dependency tree to a simple array **/
+/** Flatten a .dependency tree to a simple array */
 function flatten(dependencyTree: FileDependencies, vault: File[] = []): File[] {
 	return _.values(dependencyTree || {})
 		.reduce((list, item) => {
@@ -145,7 +145,7 @@ function flatten(dependencyTree: FileDependencies, vault: File[] = []): File[] {
  */
 type Cache = {[key: string]: any};
 
-/** patternplate-transform-node-sass configuration*/
+/** patternplate-transform-node-sass configuration */
 type Config = {
 	opts?: {[key: string]: any};
 };
