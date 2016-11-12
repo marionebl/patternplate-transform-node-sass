@@ -1,6 +1,6 @@
 {
   "name": "patternplate-transform-node-sass",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Process SASS and SCSS to CSS with patternplate",
   "license": "MIT",
   "files": [
