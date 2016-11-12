@@ -49,7 +49,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jimdo/patternplate-transform-node-sass.git"
+    "url": "git+https://github.com/marionebl/patternplate-transform-node-sass.git"
   },
   "bugs": {
     "url": "https://github.com/sinnerschrader/patternplate-transform-node-sass/issues"
