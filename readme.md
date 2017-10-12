@@ -53,7 +53,7 @@ npm install --save patternplate-transform-node-sass
 // configuration/patternplate-server/patterns.js
 module.exports = {
   formats: {
-    sass: {
+    scss: {
       transforms: ['node-sass']
     }
   }
@@ -62,7 +62,7 @@ module.exports = {
 // configuration/patternplate-server/transforms.js
 module.exports = {
   'node-sass': {
-    inFormat: 'sass',
+    inFormat: 'scss',
     outFormat: 'css',
     // https://github.com/sass/node-sass#options
     opts: {}
