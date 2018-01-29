@@ -4,7 +4,6 @@
 const path = require('path');
 const fs = require('mz/fs');
 const sass = require('node-sass');
-const merge = require('lodash').merge;
 const nResolve = require('n-resolve');
 const fp = require('lodash/fp');
 const _ = require('lodash');
@@ -44,17 +43,12 @@ function importer(opts: {[key: string]: any}, deps: Dependencies, cache: Cache):
 			const options = {base, resolveKey: 'style', npm: Boolean(context.path)};
 
 			if (match) {
-				const options = merge({}, opts);
-				const source = match.buffer.toString('utf-8');
-				render(source, options)
-					.then(({css}) => ({contents: css.toString()}))
+				cb({file: match.path});
+			} else {
+				sassLoad(url, prev, options, cache)
 					.then(cb)
 					.catch(cb);
 			}
-
-			sassLoad(url, prev, options, cache)
-				.then(cb)
-				.catch(cb);
 		});
 	};
 }
